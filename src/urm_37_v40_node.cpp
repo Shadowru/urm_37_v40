@@ -13,21 +13,17 @@ const static float MAX_DISTANCE = 30;
 
 class Sonar {
  public:
-  Sonar(int t, int e) : trigger_(t), echo_(e) {
+  Sonar(std::string serial_name) : serial_name_(serial_name) {
   }
 
   float distance(bool* error) {
-	    return 0;
-  }
-
     *error = false;
     return 5.0;
   }
 
 private:
+    std::string serial_name_;
 };
-
-}
 
 int main(int argc, char **argv) {
 
