@@ -41,7 +41,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(${PROJECT_NAME}_node src/urm_37_v40_node.cpp include/urm_37_v40_node/serial.c)
+add_executable(${PROJECT_NAME}_node src/urm_37_v40_node.cpp src/serial.c)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
