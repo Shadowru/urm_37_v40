@@ -84,6 +84,7 @@ int main(int argc, char **argv) {
   // Build base range message that will be used for
   // each time a msg is published.
   sensor_msgs::Range range;
+  range.header.frame_id = "sensor";
   range.radiation_type = sensor_msgs::Range::ULTRASOUND;
   range.min_range = urm_37_40_node::MIN_DISTANCE;
   range.max_range = urm_37_40_node::MAX_DISTANCE;
