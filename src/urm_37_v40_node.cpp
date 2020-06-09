@@ -30,8 +30,8 @@ class Sonar {
   }
 
   void close(){
-    serial_close(serial);
-    serial_free(serial);
+    serial_close(serial_);
+    serial_free(serial_);
   };
 
   private:
