@@ -8,61 +8,23 @@ using namespace std;
 
 namespace urm_37_40_node {
 
-// Maximum distance reported. Values over this distance
-// report MAX_DISTANCE. TODO make this a property.
+const static float MIN_DISTANCE = 5;
 const static float MAX_DISTANCE = 30;
-const static float DIST_SCALE = 58.0;
-const static float TRAVEL_TIME_MAX = MAX_DISTANCE * DIST_SCALE;
 
 class Sonar {
  public:
   Sonar(int t, int e) : trigger_(t), echo_(e) {
-    pinMode(trigger_, OUTPUT);
-    pinMode(echo_, INPUT);
-    digitalWrite(trigger_, LOW);
-    delay(1000);
   }
 
   float distance(bool* error) {
-    // Send trig pulse
-    digitalWrite(trigger_, HIGH);
-    delayMicroseconds(20);
-    digitalWrite(trigger_, LOW);
+	    return 0;
+  }
 
-    // Wait for echo. Very rarely (2 of 12K at 20Hz)
-    // see ECHO never go HIGH so we include a way to
-    // bail.
-    int bail = 1000;
-    while(digitalRead(echo_) == LOW) {
-      if (--bail == 0) {
-	*error = true;
-	return 0;
-      }
-    }
-
-    // Measure time for echo. Return early if the
-    // pulse is appearing to take too long. Note:
-    // error case of never going LOW results in
-    // MAX reading :/
-    long startTime = micros();
-    long travelTime = 0;
-    while(digitalRead(echo_) == HIGH) {
-      travelTime = micros() - startTime;
-      if (travelTime > TRAVEL_TIME_MAX) {
-	travelTime = TRAVEL_TIME_MAX;
-	break;
-      }
-      delayMicroseconds(100);
-    }
-
-    // Return distance in cm
     *error = false;
-    return travelTime / 58.0;
+    return 5.0;
   }
 
 private:
-  int trigger_;
-  int echo_;
 };
 
 }
