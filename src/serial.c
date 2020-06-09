@@ -21,7 +21,7 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
-#include "serial.h"
+#include "urm_37_v40/serial.h"
 
 struct serial_handle {
     int fd;
