@@ -21,7 +21,7 @@ class Sonar {
     return 5.0;
   }
 
-private:
+  private:
     std::string serial_name_;
 };
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
   ros::Rate rate(10);  // 10 hz
 
   vector<urm_37_40_node::Sonar> sonars;
-  sonars.push_back(urm_37_40_node::Sonar(24, 25));
+  sonars.push_back(urm_37_40_node::Sonar("/dev/ttyUSB0"));
 
   // Build a publisher for each sonar.
   vector<ros::Publisher> sonar_pubs;
@@ -48,8 +48,8 @@ int main(int argc, char **argv) {
   // each time a msg is published.
   sensor_msgs::Range range;
   range.radiation_type = sensor_msgs::Range::ULTRASOUND;
-  range.min_range = 0.0;
-  range.max_range = hc_sr04_node::MAX_DISTANCE;
+  range.min_range = urm_37_40_node::MIN_DISTANCE;
+  range.max_range = urm_37_40_node::MAX_DISTANCE;
 
   float distance;
   bool error;
