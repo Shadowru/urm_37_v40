@@ -45,7 +45,7 @@ class Sonar {
     int sonarValue = sonar_data[1] << 8;
     sonarValue = sonarValue + sonar_data[2];
 
-    return sonarValue / 1000.0;
+    return sonarValue / 100.0;
   }
 
   void close(){
