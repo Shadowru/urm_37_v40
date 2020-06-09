@@ -19,7 +19,7 @@ class Sonar {
     serial_ = serial_new();
 
     if (serial_open(serial_, "/dev/ttyUSB0", 115200) < 0) {
-        ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial));
+        ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial_));
         exit(1);
     }
   }
