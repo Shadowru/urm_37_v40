@@ -25,6 +25,8 @@ class Sonar {
     std::string serial_name_;
 };
 
+} // namespace urm_37_40_node
+
 int main(int argc, char **argv) {
 
   // Start ROS node.
