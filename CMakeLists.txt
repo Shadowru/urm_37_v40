@@ -42,7 +42,7 @@ include_directories(
 )
 
 add_executable(urm_37_v40 src/urm_37_v40_node.cpp)
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+target_link_libraries(${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
