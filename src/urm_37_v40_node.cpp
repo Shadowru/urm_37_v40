@@ -27,12 +27,12 @@ class Sonar {
   float distance(bool* error) {
     *error = false;
 
-    if(serial_write(serial, range_cmd, 4)<0){
+    if(serial_write(serial_, range_cmd, 4)<0){
         *error = true;
         return -1;
     }
 
-    if(serial_read(serial, sonar_data, 4)<0){
+    if(serial_read(serial_, sonar_data, 4)<0){
         *error = true;
         return -1;
     };
