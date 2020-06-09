@@ -22,14 +22,12 @@ class Sonar {
         ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial_));
         exit(1);
     }
-
-    const uint8_t EnPwmCmd[4]={0x22 0x00 0x00 0x22};
-    serial_write(serial, sonar_data, 4);
-
   }
 
   float distance(bool* error) {
     *error = false;
+
+    serial_write(serial, range_cmd, 4);
 
     if(serial_read(serial, sonar_data, 4)<0){
         *error = true;
@@ -55,6 +53,7 @@ class Sonar {
     std::string serial_name_;
     serial_t *serial_;
     uint8_t sonar_data[4];
+    const uint8_t range_cmd[4]={0x22, 0x00, 0x00, 0x22};
 };
 
 } // namespace urm_37_40_node
