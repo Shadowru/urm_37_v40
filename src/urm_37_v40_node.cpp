@@ -11,22 +11,39 @@ using namespace std;
 namespace urm_37_40_node {
 
 const static float MIN_DISTANCE = 0.5;
-const static float MAX_DISTANCE = 30;
+const static float MAX_DISTANCE = 5;
 
 class Sonar {
  public:
   Sonar(std::string serial_name) : serial_name_(serial_name) {
     serial_ = serial_new();
 
-    if (serial_open(serial_, "/dev/ttyUSB0", 115200) < 0) {
+    if (serial_open(serial_, "/dev/ttyUSB0", 9600) < 0) {
         ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial_));
         exit(1);
     }
+
+    const uint8_t EnPwmCmd[4]={0x22 0x00 0x00 0x22};
+    serial_write(serial, sonar_data, 4);
+
   }
 
   float distance(bool* error) {
     *error = false;
-    return MIN_DISTANCE;
+
+    if(serial_read(serial, sonar_data, 4)<0){
+        *error = true;
+        return -1;
+    };
+
+    if(sonar_data[1] == 0xFF && sonar_data[2] == 0xFF){
+        *error = true;
+        return -1;
+    }
+    int sonarValue = sonar_data[1] << 8;
+    sonarValue = sonarValue + sonar_data[2];
+
+    return sonarValue / 1000;
   }
 
   void close(){
@@ -37,6 +54,7 @@ class Sonar {
   private:
     std::string serial_name_;
     serial_t *serial_;
+    uint8_t sonar_data[4];
 };
 
 } // namespace urm_37_40_node
