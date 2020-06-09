@@ -32,7 +32,7 @@ class Sonar {
         return -1;
     }
 
-    if(serial_read(serial_, sonar_data, 4)<0){
+    if(serial_read(serial_, sonar_data, 4, 100)<0){
         *error = true;
         return -1;
     };
