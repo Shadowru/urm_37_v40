@@ -10,7 +10,7 @@ using namespace std;
 
 namespace urm_37_40_node {
 
-const static float MIN_DISTANCE = 0.5;
+const static float MIN_DISTANCE = 0.05;
 const static float MAX_DISTANCE = 5;
 
 class Sonar {
