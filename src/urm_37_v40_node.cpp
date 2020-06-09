@@ -4,6 +4,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/Range.h>
 
+#include "serial.h"
+
 using namespace std;
 
 namespace urm_37_40_node {
@@ -14,6 +16,12 @@ const static float MAX_DISTANCE = 30;
 class Sonar {
  public:
   Sonar(std::string serial_name) : serial_name_(serial_name) {
+    serial_ = serial_new();
+
+    if (serial_open(serial_, "/dev/ttyUSB0", 115200) < 0) {
+        ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial));
+        exit(1);
+    }
   }
 
   float distance(bool* error) {
@@ -21,8 +29,14 @@ class Sonar {
     return 5.0;
   }
 
+  void close(){
+    serial_close(serial);
+    serial_free(serial);
+  };
+
   private:
     std::string serial_name_;
+    serial_t *serial_;
 };
 
 } // namespace urm_37_40_node
@@ -66,6 +80,10 @@ int main(int argc, char **argv) {
     }
     ros::spinOnce();
     rate.sleep();
+  }
+
+  for (int i = 0; i < sonars.size(); ++i) {
+    sonars[i].close();
   }
   return 0;
 }
