@@ -1,3 +1,3 @@
 <launch>
-    <node name="urm_37_v40" pkg="urm_37_v40" type="urm_37_v40_node" output="screen"/>
+    <node name="urm_37_v40" pkg="urm_37_v40" type="urm_37_v40" output="screen"/>
 </launch>
