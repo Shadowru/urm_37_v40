@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
 
   std::string sonar_uart;
 
-  nh.param<std::string>("sonar_uart", sonar_uart, "/dev/ttySAC0");
+  node.param<std::string>("sonar_uart", sonar_uart, "/dev/ttySAC0");
 
   vector<urm_37_40_node::Sonar> sonars;
   sonars.push_back(urm_37_40_node::Sonar("/dev/ttyUSB0"));
