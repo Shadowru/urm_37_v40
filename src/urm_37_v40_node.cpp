@@ -18,7 +18,7 @@ class Sonar {
   Sonar(std::string serial_name) : serial_name_(serial_name) {
     serial_ = serial_new();
 
-    if (serial_open(serial_, "/dev/ttyUSB0", 9600) < 0) {
+    if (serial_open(serial_, serial_name, 9600) < 0) {
         ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial_));
         exit(1);
     }
@@ -69,6 +69,10 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "urm_37_40");
   ros::NodeHandle node;
   ros::Rate rate(10);  // 10 hz
+
+  std::string sonar_uart;
+
+  nh.param<std::string>("sonar_uart", sonar_uart, "/dev/ttySAC0");
 
   vector<urm_37_40_node::Sonar> sonars;
   sonars.push_back(urm_37_40_node::Sonar("/dev/ttyUSB0"));

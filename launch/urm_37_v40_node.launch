@@ -1,3 +1,5 @@
 <launch>
-    <node name="urm_37_v40" pkg="urm_37_v40" type="node" output="screen"/>
+    <node name="urm_37_v40" pkg="urm_37_v40" type="node" output="screen">
+        <param name="sonar_uart" value="/dev/ttySAC0"/>
+    </node>
 </launch>
