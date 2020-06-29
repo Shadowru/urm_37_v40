@@ -18,7 +18,7 @@ class Sonar {
   Sonar(std::string serial_name) : serial_name_(serial_name) {
     serial_ = serial_new();
 
-    if (serial_open(serial_, serial_name.c_str();, 9600) < 0) {
+    if (serial_open(serial_, serial_name.c_str(), 9600) < 0) {
         ROS_ERROR("serial_open(): %s\n", serial_errmsg(serial_));
         exit(1);
     }
